@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any
 
 from fastapi import APIRouter
@@ -18,7 +20,8 @@ async def melty_state() -> dict[str, Any]:
     # Read memory
     for state in melty_memory.get_memory_config()["stateInfo"]:
         current_state[state["key"]] = melty_memory.read(
-            state["location"], state["size"]
+            state["location"],
+            state["size"],
         )
 
     return current_state

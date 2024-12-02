@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import ctypes
 import json
 import logging
@@ -42,7 +44,7 @@ def get_memory_config() -> dict[str, any]:
     return json.loads(MELTY_MEMORY_CONFIG.read_text())
 
 
-def get_pid() -> Optional[int]:
+def get_pid() -> int | None:
     """Grabs the PID of the Melty Blood executable"""
     cmd = "tasklist"
     task_data = subprocess.check_output(cmd, creationflags=0x08000000).decode("UTF8")
@@ -75,7 +77,7 @@ def look_for_melty() -> bool:
     return False
 
 
-def read(addr: int, size: int) -> Optional[int]:
+def read(addr: int, size: int) -> int | None:
     """Reads a part of memory from the process"""
 
     # Create a buffer.
